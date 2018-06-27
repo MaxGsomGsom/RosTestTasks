@@ -1,0 +1,6 @@
+<launch>
+    <node name="observer_node4" pkg="task4" type="observer_node4" output="screen"/>
+    <node name="runner1" pkg="task4" type="runner_node4" output="screen"/>
+    <node name="runner2" pkg="task4" type="runner_node4" output="screen"/>
+    <node name="runner3" pkg="task4" type="runner_node4" output="screen"/>
+</launch>
