@@ -14,8 +14,7 @@ int main(int argc, char **argv)
   double speed = 1;
   Time prev_time = Time::now();
 
-  while (ok())
-  {
+  while (ok()) {
     //get movement distanse from time delta
     Time cur_time = Time::now();
     double delta_time = (cur_time - prev_time).nsec / pow(10, 9);

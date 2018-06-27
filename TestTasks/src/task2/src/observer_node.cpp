@@ -9,17 +9,19 @@ std::vector<geometry_msgs::Pose> poses;
 Time prev_time;
 double interval = 0.1;
 
-void poseCallback(const geometry_msgs::PoseStamped::ConstPtr& msg)
+void poseCallback(const geometry_msgs::PoseStamped::ConstPtr &msg)
 {
   //save one pose per interval
   Time cur_time = Time::now();
   double delta_time = (cur_time - prev_time).nsec / pow(10, 9);
-  if (delta_time<interval) return;
+  if (delta_time < interval)
+    return;
   prev_time = cur_time;
 
   //save pose to array
-  geometry_msgs::PoseArray new_msg;
   poses.push_back(msg->pose);
+
+  geometry_msgs::PoseArray new_msg;
   new_msg.poses = poses;
   new_msg.header.stamp = Time::now();
   new_msg.header.frame_id = "map";
@@ -36,8 +38,7 @@ int main(int argc, char **argv)
   Rate loop_rate(10);
   prev_time = Time::now();
 
-  while (ok())
-  {
+  while (ok()) {
     spinOnce();
     loop_rate.sleep();
   }

@@ -13,10 +13,13 @@ int main(int argc, char **argv)
   Publisher pose_pub = nh.advertise<geometry_msgs::PoseStamped>("pose", 1000);
   Rate loop_rate(100);
 
+  //error gain for x and y coordinates
+  double error_gain = 0.05;
+
   //set targets chain
   int targets_num = 5;
   int cur_target = 1;
-  double traj[targets_num][3] = { {8, 7, 0}, {-5, 8, 0}, {-9, -4, 0}, {6, -9, 0}, {11, -1, 0}};
+  double traj[targets_num][3] = {{8, 7, 0}, {-5, 8, 0}, {-9, -4, 0}, {6, -9, 0}, {11, -1, 0}}; //pentagon
   //calculate yaw of targets
   traj[0][2] = std::atan2(traj[targets_num - 1][1] - traj[0][1], traj[targets_num - 1][0] - traj[0][0]) + M_PI;
   for (int i = 1; i < targets_num; i++) {
@@ -92,8 +95,8 @@ int main(int argc, char **argv)
     geometry_msgs::PoseStamped msg;
     msg.header.stamp = cur_time;
     msg.header.frame_id = "map";
-    msg.pose.position.x = x;
-    msg.pose.position.y = y;
+    msg.pose.position.x = x + std::fmod(rand(), x * error_gain); //add error
+    msg.pose.position.y = y + std::fmod(rand(), y * error_gain);
     msg.pose.position.z = 0;
     msg.pose.orientation = tf::createQuaternionMsgFromYaw(yaw);
 
