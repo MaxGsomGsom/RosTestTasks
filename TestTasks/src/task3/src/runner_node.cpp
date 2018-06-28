@@ -2,7 +2,6 @@
 #include <geometry_msgs/PoseStamped.h>
 #include <tf/transform_datatypes.h>
 #include <math.h>
-#include <vector>
 
 using namespace ros;
 

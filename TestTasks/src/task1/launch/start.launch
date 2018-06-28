@@ -1,4 +1,4 @@
 <launch>
-    <node name="observer_node1" pkg="task1" type="observer_node1" output="screen"/>
-    <node name="runner_node1" pkg="task1" type="runner_node1" output="screen"/>
+    <node name="observer_node1" pkg="task1" type="observer_node.py" output="screen"/>
+    <node name="runner_node1" pkg="task1" type="runner_node.py" output="screen"/>
 </launch>
